@@ -3,546 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Printiology | Lab for Art</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        fantasy: ['Cinzel', 'serif'],
-                        body: ['Lato', 'sans-serif'],
-                    },
-                    colors: {
-                        mystic: {
-                            900: '#1a0b2e',
-                            800: '#2d1b4e',
-                            700: '#432c7a',
-                            gold: '#ffd700',
-                            accent: '#ff007a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <title>Printiology | Mini Canvas Kits</title>
     <style>
+        /* Modern, Minimalist Typography and Layout */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
         body {
-            background-color: #0f0518;
-            color: #e2e8f0;
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            color: #111;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a0b2e; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #432c7a; 
-            border-radius: 4px;
-        }
-
-        /* Holographic Effect */
-        .holo-card {
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        
-        .holo-card::before {
-            content: "";
-            position: absolute;
+        /* Top Navigation Bar */
+        .navbar {
+            background-color: #fff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid #111;
+            position: sticky;
             top: 0;
-            left: -150%;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: #555;
+            max-width: 650px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* 4-Column Grid for the Shopify Components */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* Elevated Card Styling */
+        .shopify-card-container {
+            background: #fff;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                115deg,
-                transparent 20%,
-                rgba(255, 0, 128, 0.3) 40%,
-                rgba(0, 255, 255, 0.3) 60%,
-                transparent 80%
-            );
-            transform: skewX(-25deg);
-            transition: left 0.5s;
-            z-index: 10;
-            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+            border: 1px solid #eaeaea;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
-        .holo-card:hover::before {
-            left: 150%;
-            transition: left 0.7s;
+        .shopify-card-container:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+            border-color: #ddd;
         }
 
-        .holo-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-        }
-
-        /* Product Card */
-        .product-card {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .product-card:hover {
-            border-color: #ffd700;
-            transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        /* Custom Button */
-        .btn-gold {
-            background: linear-gradient(45deg, #b8860b, #ffd700);
-            color: #1a0b2e;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        .btn-gold:hover {
-            background: linear-gradient(45deg, #ffd700, #ffe55c);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-        }
-        
-        .btn-loading {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .hidden-view {
-            display: none;
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid #eaeaea;
+            background-color: #fff;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
-<body class="font-body flex flex-col min-h-screen">
+<body>
 
-    <div class="bg-mystic-gold text-mystic-900 text-center py-2 px-4 font-bold text-sm tracking-wider shadow-md relative z-50">
-        <i class="fa-solid fa-truck-fast mr-2"></i> 
-        FREE SHIPPING ON ORDERS OVER $50
+    <div class="navbar">
+        <h2 class="navbar-brand">Printiology</h2>
     </div>
 
-    <nav class="bg-mystic-900 border-b border-mystic-700 sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="showMainPage()">
-                <img src="img/Printiologylogo.png" alt="Printiology Logo" class="h-10 w-auto object-contain">
-                <h1 class="font-fantasy text-2xl text-white tracking-wider">Printiology</h1>
-            </div>
-        </div>
-    </nav>
-
-    <div id="main-view">
-        <header class="relative py-20 text-center bg-gradient-to-b from-mystic-900 to-mystic-800">
-            <div class="container mx-auto px-4">
-                <h2 class="font-fantasy text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-mystic-gold to-amber-600 mb-4">
-                    Enhance Your Tabletop Experience
-                </h2>
-                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
-                    Premium quality proxies and holographic art prints for the discerning spellcaster.
-                </p>
-                <div class="mt-8 flex justify-center gap-4">
-                    <a href="#cards" class="px-6 py-2 border border-mystic-gold text-mystic-gold hover:bg-mystic-gold hover:text-mystic-900 transition rounded font-fantasy">Shop Proxies</a>
-                    <a href="#posters" class="px-6 py-2 border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-mystic-900 transition rounded font-fantasy">Shop Art</a>
-                </div>
-            </div>
+    <div class="container">
+        <header>
+            <h1>Mini Canvas Kits</h1>
+            <p class="subtitle">Complete 4x5" paint-your-own bundles. Includes pre-drawn canvas, 4 vivid paint colors, and a detail brush. Perfect for party favors and creative afternoons.</p>
         </header>
 
-        <main class="flex-grow container mx-auto px-4 py-12 space-y-20">
-
-            <section id="cards">
-                <div class="flex items-center gap-4 mb-8 border-b border-mystic-700 pb-4">
-                    <i class="fa-solid fa-layer-group text-2xl text-mystic-gold"></i>
-                    <h3 class="text-3xl font-fantasy text-white">Proxy Decks</h3>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="product-card bg-mystic-800 rounded-xl overflow-hidden p-6 flex flex-col">
-                        <div class="h-48 bg-mystic-900 rounded-lg mb-4 relative group overflow-hidden">
-                            <img src="img/3.png" alt="Commander Deck" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition duration-500">
-                            <span class="absolute bottom-2 right-2 text-xs text-white bg-black bg-opacity-60 px-2 py-1 rounded">2.5" x 3.5"</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Full Commander Deck</h4>
-                        <p class="text-gray-400 text-sm mb-2">Complete 100-card deck. Customize your list.</p>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-2xl font-bold text-white">$44.99</span>
-                            <button onclick="openDeckBuilder(1)" class="btn-gold px-4 py-2 rounded-lg text-sm uppercase tracking-wide">Customize Deck</button>
-                        </div>
-                    </div>
-
-                    <div class="product-card bg-mystic-800 rounded-xl overflow-hidden p-6 flex flex-col">
-                        <div class="h-48 bg-mystic-900 rounded-lg mb-4 relative group overflow-hidden">
-                            <img src="img/4.png" alt="Standard Deck" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition duration-500">
-                            <span class="absolute bottom-2 right-2 text-xs text-white bg-black bg-opacity-60 px-2 py-1 rounded">2.5" x 3.5"</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Standard Deck</h4>
-                        <p class="text-gray-400 text-sm mb-2">60-card construct. Perfect for standard playtesting.</p>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-2xl font-bold text-white">$29.99</span>
-                            <button onclick="openDeckBuilder(2)" class="btn-gold px-4 py-2 rounded-lg text-sm uppercase tracking-wide">Customize Deck</button>
-                        </div>
-                    </div>
-
-                    <div class="product-card bg-mystic-800 rounded-xl overflow-hidden p-6 flex flex-col">
-                        <div class="h-48 bg-mystic-900 rounded-lg mb-4 relative group overflow-hidden">
-                            <img src="img/5.jpg" alt="Proxy Pack" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition duration-500">
-                            <span class="absolute bottom-2 right-2 text-xs text-white bg-black bg-opacity-60 px-2 py-1 rounded">2.5" x 3.5"</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Card Proxy Pack</h4>
-                        <p class="text-gray-400 text-sm mb-2">20 assorted high-power staples for your collection.</p>
-                        <div class="mt-auto flex justify-between items-center">
-                            <span class="text-2xl font-bold text-white">$12.99</span>
-                            <button onclick="openDeckBuilder(3)" class="btn-gold px-4 py-2 rounded-lg text-sm uppercase tracking-wide">Customize Deck</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="posters">
-                <div class="flex items-center gap-4 mb-8 border-b border-mystic-700 pb-4">
-                    <i class="fa-solid fa-image text-2xl text-mystic-gold"></i>
-                    <h3 class="text-3xl font-fantasy text-white">Holographic Wall Art</h3>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    <div class="holo-card bg-mystic-800 rounded-xl overflow-hidden p-6 flex flex-col gap-6">
-                        <div class="w-full h-64 bg-mystic-900 rounded-lg overflow-hidden border border-gray-700 relative flex items-center justify-center group">
-                            <img src="img/6.png" alt="Custom Card Poster" class="w-full h-full object-cover hover:scale-105 transition duration-700">
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <h4 class="text-xl font-bold text-white mb-2 font-fantasy">Custom Card Poster</h4>
-                            <p class="text-gray-400 text-sm mb-4">Upload art OR write the card name (MTG, Pokemon, etc).</p>
-                            <div class="mt-auto">
-                                <span class="text-2xl font-bold text-mystic-gold">$12.99</span>
-                                <br>
-                                <br>
-                                <button onclick="openDeckBuilder(6)" class="btn-gold px-4 py-2 rounded-lg text-sm uppercase tracking-wide w-full">Create</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-        </main>
-    </div>
-
-    <div id="deck-builder-view" class="hidden-view flex-grow container mx-auto px-4 py-8">
-        <div class="max-w-3xl mx-auto bg-mystic-800 rounded-xl border border-mystic-700 p-8">
-            <div class="flex justify-between items-start mb-6 border-b border-mystic-700 pb-6">
-                <div>
-                    <button onclick="showMainPage()" class="text-gray-400 hover:text-white mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-arrow-left"></i> Back to Shop
-                    </button>
-                    <h2 class="text-3xl font-fantasy text-white" id="builder-title">Deck Configuration</h2>
-                </div>
-                <i class="fa-solid fa-scroll text-4xl text-mystic-700"></i>
+        <!-- Product Images Grid -->
+        <div class="product-grid">
+            
+            <!-- PRODUCT 1: UNICORN -->
+            <div class="shopify-card-container">
+                <div id='product-component-1782805303791'></div>
+                <script type="text/javascript">
+                /*<![CDATA[*/
+                (function () {
+                  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                  if (window.ShopifyBuy) {
+                    if (window.ShopifyBuy.UI) {
+                      ShopifyBuyInit();
+                    } else {
+                      loadScript();
+                    }
+                  } else {
+                    loadScript();
+                  }
+                  function loadScript() {
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = scriptURL;
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                    script.onload = ShopifyBuyInit;
+                  }
+                  function ShopifyBuyInit() {
+                    var client = ShopifyBuy.buildClient({
+                      domain: 'n0uysm-zr.myshopify.com',
+                      storefrontAccessToken: 'c22bee8fd4abac9c4db9d92c33a37b9e',
+                    });
+                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                      ui.createComponent('product', {
+                        id: '8256462422090',
+                        node: document.getElementById('product-component-1782805303791'),
+                        moneyFormat: '%24%7B%7Bamount%7D%7D',
+                        options: {
+                          "product": {
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "productSet": {
+                            "styles": {
+                              "products": {
+                                "@media (min-width: 601px)": {
+                                  "margin-left": "-20px"
+                                }
+                              }
+                            }
+                          },
+                          "modalProduct": {
+                            "contents": {
+                              "img": false,
+                              "imgWithCarousel": true,
+                              "button": false,
+                              "buttonWithQuantity": true
+                            },
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "option": {},
+                          "cart": {
+                            "text": {
+                              "total": "Subtotal",
+                              "button": "Checkout"
+                            }
+                          },
+                          "toggle": {}
+                        },
+                      });
+                    });
+                  }
+                })();
+                /*]]>*/
+                </script>
             </div>
 
-            <div class="bg-mystic-900 p-4 rounded-lg mb-6 border border-gray-700">
-                <p class="text-gray-300 text-sm">
-                    <i class="fa-solid fa-circle-info text-mystic-gold mr-2"></i>
-                    <span id="instruction-text">Paste your deck list or file link below.</span>
-                </p>
+            <!-- PRODUCT 2: SPORTS CAR -->
+            <div class="shopify-card-container">
+                <div id='product-component-1782805369540'></div>
+                <script type="text/javascript">
+                /*<![CDATA[*/
+                (function () {
+                  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                  if (window.ShopifyBuy) {
+                    if (window.ShopifyBuy.UI) {
+                      ShopifyBuyInit();
+                    } else {
+                      loadScript();
+                    }
+                  } else {
+                    loadScript();
+                  }
+                  function loadScript() {
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = scriptURL;
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                    script.onload = ShopifyBuyInit;
+                  }
+                  function ShopifyBuyInit() {
+                    var client = ShopifyBuy.buildClient({
+                      domain: 'n0uysm-zr.myshopify.com',
+                      storefrontAccessToken: 'c22bee8fd4abac9c4db9d92c33a37b9e',
+                    });
+                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                      ui.createComponent('product', {
+                        id: '8256469401674',
+                        node: document.getElementById('product-component-1782805369540'),
+                        moneyFormat: '%24%7B%7Bamount%7D%7D',
+                        options: {
+                          "product": {
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "productSet": {
+                            "styles": {
+                              "products": {
+                                "@media (min-width: 601px)": {
+                                  "margin-left": "-20px"
+                                }
+                              }
+                            }
+                          },
+                          "modalProduct": {
+                            "contents": {
+                              "img": false,
+                              "imgWithCarousel": true,
+                              "button": false,
+                              "buttonWithQuantity": true
+                            },
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "option": {},
+                          "cart": {
+                            "text": {
+                              "total": "Subtotal",
+                              "button": "Checkout"
+                            }
+                          },
+                          "toggle": {}
+                        },
+                      });
+                    });
+                  }
+                })();
+                /*]]>*/
+                </script>
             </div>
 
-            <div class="mb-8">
-                <div id="input-container-text">
-                    <label class="block text-white font-bold mb-2" id="text-label">Card List / File Link</label>
-                    <textarea id="deck-list-text" rows="10" class="w-full bg-black border border-gray-700 rounded-lg p-4 text-white font-mono text-sm focus:outline-none focus:border-mystic-gold" placeholder="1x Sol Ring..."></textarea>
-                </div>
-
-                <div id="input-container-image" class="hidden">
-                    <label class="block text-white font-bold mb-2">Upload Your Image</label>
-                    <div class="flex items-center justify-center w-full">
-                        <label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 border-mystic-700 border-dashed rounded-lg cursor-pointer bg-mystic-900 hover:bg-mystic-800 hover:border-mystic-gold transition">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <i class="fa-solid fa-cloud-arrow-up text-4xl text-gray-400 mb-3"></i>
-                                <p class="mb-2 text-sm text-gray-400"><span class="font-bold">Click to upload</span> or drag and drop</p>
-                                <p class="text-xs text-gray-500">PNG, JPG (MAX. 10MB)</p>
-                            </div>
-                            <input id="image-upload" type="file" class="hidden" accept="image/png, image/jpeg" />
-                        </label>
-                    </div>
-                    <div id="file-name-display" class="mt-4 text-center text-mystic-gold font-bold hidden"></div>
-                </div>
+            <!-- PRODUCT 3: SEA SUNSET -->
+            <div class="shopify-card-container">
+                <div id='product-component-1782805391554'></div>
+                <script type="text/javascript">
+                /*<![CDATA[*/
+                (function () {
+                  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                  if (window.ShopifyBuy) {
+                    if (window.ShopifyBuy.UI) {
+                      ShopifyBuyInit();
+                    } else {
+                      loadScript();
+                    }
+                  } else {
+                    loadScript();
+                  }
+                  function loadScript() {
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = scriptURL;
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                    script.onload = ShopifyBuyInit;
+                  }
+                  function ShopifyBuyInit() {
+                    var client = ShopifyBuy.buildClient({
+                      domain: 'n0uysm-zr.myshopify.com',
+                      storefrontAccessToken: 'c22bee8fd4abac9c4db9d92c33a37b9e',
+                    });
+                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                      ui.createComponent('product', {
+                        id: '8256470057034',
+                        node: document.getElementById('product-component-1782805391554'),
+                        moneyFormat: '%24%7B%7Bamount%7D%7D',
+                        options: {
+                          "product": {
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "productSet": {
+                            "styles": {
+                              "products": {
+                                "@media (min-width: 601px)": {
+                                  "margin-left": "-20px"
+                                }
+                              }
+                            }
+                          },
+                          "modalProduct": {
+                            "contents": {
+                              "img": false,
+                              "imgWithCarousel": true,
+                              "button": false,
+                              "buttonWithQuantity": true
+                            },
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "option": {},
+                          "cart": {
+                            "text": {
+                              "total": "Subtotal",
+                              "button": "Checkout"
+                            }
+                          },
+                          "toggle": {}
+                        },
+                      });
+                    });
+                  }
+                })();
+                /*]]>*/
+                </script>
             </div>
 
-            <button id="submit-btn" onclick="submitDeckConfig()" class="w-full btn-gold py-4 rounded-lg text-lg font-bold uppercase tracking-wider shadow-lg flex justify-center items-center gap-2">
-                <span id="btn-text">1. Send List to Workshop</span>
-                <i id="btn-icon" class="fa-solid fa-paper-plane"></i>
-            </button>
-
-            <div id="shopify-buy-container" class="hidden mt-6 p-6 bg-green-900 bg-opacity-30 border border-green-600 rounded-lg text-center">
-                <p class="text-green-400 font-bold mb-4"><i class="fa-solid fa-check-circle"></i> Data Received! Reference ID: <span id="success-ref-id" class="text-white"></span></p>
-                <p class="text-gray-300 text-sm mb-4">Now add the product to your cart:</p>
-                <div id="dynamic-shopify-button" class="flex justify-center"></div>
+            <!-- PRODUCT 4: UNDERSEA TURTLE -->
+            <div class="shopify-card-container">
+                <div id='product-component-1782805435981'></div>
+                <script type="text/javascript">
+                /*<![CDATA[*/
+                (function () {
+                  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                  if (window.ShopifyBuy) {
+                    if (window.ShopifyBuy.UI) {
+                      ShopifyBuyInit();
+                    } else {
+                      loadScript();
+                    }
+                  } else {
+                    loadScript();
+                  }
+                  function loadScript() {
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.src = scriptURL;
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                    script.onload = ShopifyBuyInit;
+                  }
+                  function ShopifyBuyInit() {
+                    var client = ShopifyBuy.buildClient({
+                      domain: 'n0uysm-zr.myshopify.com',
+                      storefrontAccessToken: 'c22bee8fd4abac9c4db9d92c33a37b9e',
+                    });
+                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                      ui.createComponent('product', {
+                        id: '8256470122570',
+                        node: document.getElementById('product-component-1782805435981'),
+                        moneyFormat: '%24%7B%7Bamount%7D%7D',
+                        options: {
+                          "product": {
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "productSet": {
+                            "styles": {
+                              "products": {
+                                "@media (min-width: 601px)": {
+                                  "margin-left": "-20px"
+                                }
+                              }
+                            }
+                          },
+                          "modalProduct": {
+                            "contents": {
+                              "img": false,
+                              "imgWithCarousel": true,
+                              "button": false,
+                              "buttonWithQuantity": true
+                            },
+                            "styles": {
+                              "product": {
+                                "@media (min-width: 601px)": {
+                                  "max-width": "100%",
+                                  "margin-left": "0px",
+                                  "margin-bottom": "0px"
+                                }
+                              }
+                            },
+                            "text": {
+                              "button": "Add to cart"
+                            }
+                          },
+                          "option": {},
+                          "cart": {
+                            "text": {
+                              "total": "Subtotal",
+                              "button": "Checkout"
+                            }
+                          },
+                          "toggle": {}
+                        },
+                      });
+                    });
+                  }
+                })();
+                /*]]>*/
+                </script>
             </div>
+
         </div>
     </div>
 
-    <footer class="bg-black py-8 border-t border-mystic-700 text-center mt-auto">
-        <p class="text-gray-500 text-sm">&copy; 2025 Printiology. All rights reserved.</p>
+    <footer>
+        &copy; 2026 Printiology. All rights reserved.
     </footer>
 
-    <script type="text/javascript">
-    /*<![CDATA[*/
-    
-    // --- CONFIGURATION ---
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTPI2jjiQ2hUwe60CBIP0Qs8tmRthRgjP0M-TY_rYtOLFLLxbUWCkW5gVafNKCQCxO/exec";
-    
-    // --- UPDATED SHOPIFY PRODUCT IDS ---
-    const SHOPIFY_PRODUCT_IDS = {
-        1: '8108353486922', // Full Commander Deck
-        2: '8108353880138', // Standard Deck
-        3: '8108353945674', // Card Proxy Pack
-        6: '8108354240586', // Custom Card Poster
-    };
-
-    let currentBuilderId = null;
-    let shopifyUI = null;
-    let selectedFile = null;
-
-    // Load Shopify SDK
-    (function () {
-      var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-      if (window.ShopifyBuy) {
-        if (window.ShopifyBuy.UI) {
-          ShopifyBuyInitMain();
-        } else {
-          loadScript();
-        }
-      } else {
-        loadScript();
-      }
-      function loadScript() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = scriptURL;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-        script.onload = ShopifyBuyInitMain;
-      }
-      
-      function ShopifyBuyInitMain() {
-        var client = ShopifyBuy.buildClient({
-          domain: 'n0uysm-zr.myshopify.com',
-          storefrontAccessToken: 'c22bee8fd4abac9c4db9d92c33a37b9e',
-        });
-        
-        ShopifyBuy.UI.onReady(client).then(function (ui) {
-          shopifyUI = ui; 
-        });
-
-        document.getElementById('image-upload').addEventListener('change', handleFileSelect);
-      }
-    })();
-
-    function handleFileSelect(event) {
-        const fileInput = event.target;
-        if (fileInput.files.length > 0) {
-            selectedFile = fileInput.files[0];
-            const display = document.getElementById('file-name-display');
-            display.innerText = "Selected: " + selectedFile.name;
-            display.classList.remove('hidden');
-        }
-    }
-
-    // --- UPDATED BUTTON RENDERING (MATCHING YOUR SNIPPETS) ---
-    function renderShopifyButton(productId, nodeId, refId) {
-        if(!shopifyUI) return;
-        
-        let customAttrs = [];
-        if (refId) {
-            customAttrs = [{ key: "Deck_List_Ref_ID", value: refId.toString() }];
-        }
-
-        shopifyUI.createComponent('product', {
-            id: productId,
-            node: document.getElementById(nodeId),
-            moneyFormat: '%24%7B%7Bamount%7D%7D',
-            options: {
-              "product": {
-                "styles": {
-                  "product": {
-                    "@media (min-width: 601px)": {
-                      "max-width": "100%", // Adjusted from snippet's 25% to fit container
-                      "margin-left": "0",
-                      "margin-bottom": "0"
-                    },
-                    "button": {
-                      "background-image": "linear-gradient(45deg, #b8860b, #ffd700)",
-                      "color": "#1a0b2e",
-                      "font-family": "Lato, sans-serif",
-                      "font-weight": "bold",
-                      ":hover": {
-                        "background-image": "linear-gradient(45deg, #ffd700, #ffe55c)",
-                        "color": "#1a0b2e"
-                      },
-                      "border-radius": "8px"
-                    }
-                  }
-                },
-                "contents": { "img": false, "title": false, "price": false },
-                "text": { "button": "Add to cart" },
-                "customAttributes": customAttrs
-              },
-              "modalProduct": {
-                "contents": {
-                  "img": false,
-                  "imgWithCarousel": true,
-                  "button": false,
-                  "buttonWithQuantity": true
-                },
-                "styles": {
-                  "product": {
-                    "@media (min-width: 601px)": {
-                      "max-width": "100%",
-                      "margin-left": "0px",
-                      "margin-bottom": "0px"
-                    }
-                  }
-                },
-                "text": { "button": "Add to cart" }
-              },
-              "cart": {
-                "text": { "total": "Subtotal", "button": "Checkout" }
-              }
-            }
-        });
-    }
-
-    function showMainPage() {
-        document.getElementById('main-view').classList.remove('hidden-view');
-        document.getElementById('deck-builder-view').classList.add('hidden-view');
-        window.scrollTo(0,0);
-    }
-
-    function openDeckBuilder(productId) {
-        currentBuilderId = productId; 
-        document.getElementById('deck-list-text').value = '';
-        document.getElementById('image-upload').value = '';
-        selectedFile = null;
-        document.getElementById('file-name-display').classList.add('hidden');
-        document.getElementById('submit-btn').classList.remove('hidden');
-        document.getElementById('shopify-buy-container').classList.add('hidden');
-        document.getElementById('dynamic-shopify-button').innerHTML = ''; 
-        
-        const textContainer = document.getElementById('input-container-text');
-        const imageContainer = document.getElementById('input-container-image');
-        const builderTitle = document.getElementById('builder-title');
-        const instrText = document.getElementById('instruction-text');
-        const btnText = document.getElementById('btn-text');
-        const textLabel = document.getElementById('text-label');
-
-        if (productId === 6) {
-            textContainer.classList.remove('hidden');
-            imageContainer.classList.remove('hidden');
-            builderTitle.innerText = "Custom Card Poster";
-            instrText.innerText = "Upload an image OR type the card name below.";
-            textLabel.innerText = "Enter Card Name (e.g., Black Lotus)";
-            document.getElementById('deck-list-text').rows = 2; 
-            btnText.innerText = "1. Create Reference";
-        } else {
-            textContainer.classList.remove('hidden');
-            imageContainer.classList.add('hidden');
-            builderTitle.innerText = "Deck Configuration";
-            textLabel.innerText = "Card List / File Link";
-            document.getElementById('deck-list-text').rows = 10; 
-            instrText.innerText = "Paste your deck list or file link below.";
-            btnText.innerText = "1. Send List to Workshop";
-        }
-
-        const btn = document.getElementById('submit-btn');
-        btn.classList.remove('btn-loading');
-        btn.disabled = false;
-        document.getElementById('main-view').classList.add('hidden-view');
-        document.getElementById('deck-builder-view').classList.remove('hidden-view');
-        window.scrollTo(0,0);
-    }
-
-    async function submitDeckConfig() {
-        const btn = document.getElementById('submit-btn');
-        const btnText = document.getElementById('btn-text');
-        let dataToSend = "";
-        let isImage = false;
-
-        if (currentBuilderId === 6) {
-            if (selectedFile) { isImage = true; } 
-            else if (document.getElementById('deck-list-text').value.trim().length > 0) {
-                isImage = false;
-                dataToSend = document.getElementById('deck-list-text').value;
-            } else {
-                alert("Please upload an image OR enter a card name.");
-                return;
-            }
-        } else {
-            dataToSend = document.getElementById('deck-list-text').value;
-            if (dataToSend.trim().length === 0) { alert("Please paste a list."); return; }
-            isImage = false;
-        }
-
-        btn.classList.add('btn-loading');
-        btn.disabled = true;
-        btnText.innerText = "Processing...";
-
-        let payload = {
-            productName: "Product " + currentBuilderId,
-            dataType: isImage ? "image" : "text"
-        };
-
-        if (isImage) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                payload.fileData = e.target.result.split(",")[1];
-                payload.fileName = selectedFile.name;
-                payload.mimeType = selectedFile.type;
-                sendToGoogle(payload);
-            };
-            reader.readAsDataURL(selectedFile);
-        } else {
-            payload.content = dataToSend;
-            sendToGoogle(payload);
-        }
-    }
-
-    function sendToGoogle(payload) {
-        fetch(GOOGLE_SCRIPT_URL, {
-            redirect: "follow",
-            method: 'POST',
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-                const refId = data.refId;
-                document.getElementById('submit-btn').classList.add('hidden');
-                const container = document.getElementById('shopify-buy-container');
-                container.classList.remove('hidden');
-                container.classList.add('block');
-                document.getElementById('success-ref-id').innerText = refId;
-                renderShopifyButton(SHOPIFY_PRODUCT_IDS[currentBuilderId], 'dynamic-shopify-button', refId);
-            } else {
-                alert("Error sending data: " + data.message);
-                resetBtn();
-            }
-        });
-    }
-
-    function resetBtn() {
-        const btn = document.getElementById('submit-btn');
-        document.getElementById('btn-text').innerText = "Try Again";
-        btn.classList.remove('btn-loading');
-        btn.disabled = false;
-    }
-    /*]]>*/
-    </script>
 </body>
 </html>
